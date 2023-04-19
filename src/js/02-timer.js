@@ -19,20 +19,20 @@ let intervalId = null;
 refs.startBtn.addEventListener('click', startTimer);
 refs.resetBtn.addEventListener('click', resetTimer);
 
+function startTimer() {
+  refs.startBtn.disabled = true;
+  intervalId = setInterval(() => {
+    const currentDate = Date.now();
+    drawingTimer(calculateTime(currentDate));
+  }, 1000);
+}
+
 function resetTimer() {
   const now = new Date();
   flatpickrInstance.setDate(now);
   clearInterval(intervalId);
   drawingTimer({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   Notify.info('Date and time updated,timer reset');
-}
-
-function startTimer() {
-  refs.startBtn.disabled = true;
-  intervalId = setInterval(() => {
-    const currentDate = Date.now();
-    drawingTimer(calculateTime(currentDate, selectedDate));
-  }, 1000);
 }
 
 function drawingTimer({ days, hours, minutes, seconds }) {
@@ -55,7 +55,7 @@ function checkDate() {
   }
 }
 
-function calculateTime(currentDate, selectedDate) {
+function calculateTime(currentDate) {
   if (selectedDate - currentDate <= 0) {
     clearInterval(intervalId);
     Notify.success('\u{231b} \u{231b} \u{231b} \u{231b} \u{231b}');
