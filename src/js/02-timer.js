@@ -47,7 +47,7 @@ function addLeadingZero(value) {
 }
 
 function checkDate() {
-  currentDate = Date.now();
+  const currentDate = Date.now();
   if (currentDate > selectedDate) {
     Notify.warning('Please choose a date in the future');
   } else {
