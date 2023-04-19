@@ -21,17 +21,15 @@ refs.resetBtn.addEventListener('click', resetTimer);
 
 function resetTimer() {
   const now = new Date();
-  flatpickrInstance.setDate(now, true);
-  flatpickrInstance.setTime(now);
-
+  flatpickrInstance.setDate(now);
   clearInterval(intervalId);
-  intervalId = null;
+  drawingTimer({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+  refs.startBtn.disabled = false;
+  Notify.info('Date and time updated,timer reset');
 }
 
 function startTimer() {
-  refs.startBtn.setAttribute('disabled', 'true');
-  refs.resetBtn.removeAttribute('disabled');
-
+  refs.startBtn.disabled = true;
   intervalId = setInterval(() => {
     const currentDate = Date.now();
     drawingTimer(calculateTime(currentDate, selectedDate));
@@ -53,9 +51,8 @@ function checkDate() {
   currentDate = Date.now();
   if (currentDate > selectedDate) {
     Notify.warning('Please choose a date in the future');
-    refs.startBtn.setAttribute('disabled', 'true');
   } else {
-    refs.startBtn.removeAttribute('disabled');
+    refs.startBtn.disabled = false;
   }
 }
 
@@ -63,7 +60,7 @@ function calculateTime(currentDate, selectedDate) {
   if (selectedDate - currentDate <= 0) {
     clearInterval(intervalId);
     Notify.success('\u{231b} \u{231b} \u{231b} \u{231b} \u{231b}');
-    return;
+    return { days: 0, hours: 0, minutes: 0, seconds: 0 };
   }
   return convertMs(selectedDate - currentDate);
 }
