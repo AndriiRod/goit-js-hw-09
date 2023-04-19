@@ -24,7 +24,6 @@ function resetTimer() {
   flatpickrInstance.setDate(now);
   clearInterval(intervalId);
   drawingTimer({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-  refs.startBtn.disabled = false;
   Notify.info('Date and time updated,timer reset');
 }
 
