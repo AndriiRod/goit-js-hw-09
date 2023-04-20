@@ -1,3 +1,5 @@
+import getRandomHexColor from './hexColorGenerator';
+
 const refsBody = document.body;
 let timerId = null;
 let isActive = false;
