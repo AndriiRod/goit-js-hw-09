@@ -11,6 +11,13 @@ formRef.addEventListener('submit', submitForm);
 function submitForm(e) {
   e.preventDefault();
   gedDataForm();
+  if (checkFormData()) {
+    createNotify();
+  } else {
+    Notify.failure('First delay,delay step and amount cannot be negative');
+  }
+}
+function createNotify() {
   for (let i = 1; i <= amount; i += 1) {
     createPromise(i, firstDelay)
       .then(({ position, delay }) => {
@@ -21,6 +28,12 @@ function submitForm(e) {
       });
     firstDelay += step;
   }
+}
+function checkFormData() {
+  if (step < 0 || firstDelay < 0 || amount <= 0) {
+    return false;
+  }
+  return true;
 }
 
 function gedDataForm() {

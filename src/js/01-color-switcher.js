@@ -26,9 +26,3 @@ function stopBtn(e) {
   e.target.previousElementSibling.removeAttribute('disabled');
   clearInterval(timerId);
 }
-
-function getRandomHexColor() {
-  return `#${Math.floor(Math.random() * 16777215)
-    .toString(16)
-    .padStart(6, 0)}`;
-}

@@ -22,6 +22,7 @@ refs.startBtn.addEventListener('click', startTimer);
 refs.resetBtn.addEventListener('click', resetTimer);
 
 function startTimer() {
+  refs.inputCalendar.disabled = true;
   refs.startBtn.disabled = true;
   intervalId = setInterval(() => {
     const currentDate = Date.now();
@@ -30,6 +31,7 @@ function startTimer() {
 }
 
 function resetTimer() {
+  refs.inputCalendar.disabled = false;
   const now = new Date();
   flatpickrInstance.setDate(now);
   clearInterval(intervalId);
