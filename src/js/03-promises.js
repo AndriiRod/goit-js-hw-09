@@ -12,9 +12,9 @@ function submitForm(e) {
   e.preventDefault();
   gedDataForm();
   if (step < 0 || firstDelay < 0 || amount <= 0) {
-    createNotify();
-  } else {
     Notify.failure('First delay,delay step and amount cannot be negative');
+  } else {
+    createNotify();
   }
 }
 function createNotify() {
