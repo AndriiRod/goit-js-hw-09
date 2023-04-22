@@ -61,6 +61,7 @@ function checkDate() {
 
 function calculateTime(currentDate) {
   if (selectedDate - currentDate <= 0) {
+    refs.inputCalendar.disabled = false;
     clearInterval(intervalId);
     Notify.success('\u{231b} \u{231b} \u{231b} \u{231b} \u{231b}');
     return { days: 0, hours: 0, minutes: 0, seconds: 0 };
